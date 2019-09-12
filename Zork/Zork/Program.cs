@@ -2,6 +2,16 @@
 
 namespace Zork
 {
+    enum Commands
+    {
+        QUIT,
+        LOOK,
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST,
+        UNKNOWN
+    }
     class Program
     {
         static void Main(string[] args)
@@ -10,23 +20,20 @@ namespace Zork
 
             //Ask for input and normalizes it.
             string inputString = Console.ReadLine();
-            inputString = inputString.ToUpper();
+            Commands command = ToCommand(inputString.Trim().ToUpper());
+            Console.WriteLine(command);
+        }
 
-            //Interpets Input
-
-            if (inputString == "QUIT")
+        private static Commands ToCommand(string commandString)
+        {
+            //Interpets Input and checks for an associated command
+            if (Enum.TryParse<Commands>(commandString, true, out Commands result))
             {
-                Console.WriteLine("Thank you for playing");
+                return result;
             }
-
-            else if (inputString == "LOOK")
-            {
-                Console.WriteLine("This is an open field west of a white house, with a boarded front door. \nA rubber mat saying 'Welcome to Zork!' lies by the door.");
-            }
-
             else
             {
-                Console.WriteLine("Unrecognized command.");
+                return Commands.UNKNOWN;
             }
         }
     }
