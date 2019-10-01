@@ -14,8 +14,12 @@ namespace Zork
     }
     class Program
     {
+        private static string[] Rooms = new string[] { "Forest", "West of House", "Behind House", "Clearing", "Canyon View" };
+        private static int playerLocation = 0;
+
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Welcome to Zork!");
 
             Commands command = Commands.UNKNOWN;
@@ -39,7 +43,16 @@ namespace Zork
                     case Commands.SOUTH:
                     case Commands.EAST:
                     case Commands.WEST:
-                        outputString = $"You moved {command}";
+                        bool canMove = Move(command);
+                        if (canMove)
+                        {
+                            outputString = $"You moved {command}";
+                        }
+                        else
+                        {
+                            outputString = "The way is shut";
+                        }
+                        Console.WriteLine(Rooms[playerLocation]);
                         break;
 
                     default:
@@ -50,7 +63,37 @@ namespace Zork
                 Console.WriteLine(outputString);
             }
         }
+        private static bool Move(Commands commands)
+        {
+            int movedir = 0;
+            switch(commands)
+            {
+                case Commands.NORTH:
+                    break;
 
+                case Commands.SOUTH:
+                    break;
+
+                case Commands.EAST:
+                    movedir = 1;
+                    break;
+
+                case Commands.WEST:
+                    movedir = -1;
+                    break;
+            }
+
+            if ((playerLocation + movedir) >= 0 && (playerLocation + movedir) < Rooms.Length)
+            {
+                playerLocation += movedir;
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
         private static Commands ToCommand(string commandString)
         {
             //Interpets Input and checks for an associated command
