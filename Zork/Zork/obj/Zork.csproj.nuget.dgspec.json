@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\na127140\\Documents\\GitHub\\Zork\\Zork\\Zork\\Zork.csproj": {}
+    "D:\\In Development\\Zork\\Zork\\Zork\\Zork.csproj": {}
   },
   "projects": {
-    "C:\\Users\\na127140\\Documents\\GitHub\\Zork\\Zork\\Zork\\Zork.csproj": {
+    "D:\\In Development\\Zork\\Zork\\Zork\\Zork.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\na127140\\Documents\\GitHub\\Zork\\Zork\\Zork\\Zork.csproj",
+        "projectUniqueName": "D:\\In Development\\Zork\\Zork\\Zork\\Zork.csproj",
         "projectName": "Zork",
-        "projectPath": "C:\\Users\\na127140\\Documents\\GitHub\\Zork\\Zork\\Zork\\Zork.csproj",
-        "packagesPath": "C:\\Users\\na127140\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\na127140\\Documents\\GitHub\\Zork\\Zork\\Zork\\obj\\",
+        "projectPath": "D:\\In Development\\Zork\\Zork\\Zork\\Zork.csproj",
+        "packagesPath": "C:\\Users\\Nabil Sekirime\\.nuget\\packages\\",
+        "outputPath": "D:\\In Development\\Zork\\Zork\\Zork\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\na127140\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Nabil Sekirime\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -51,10 +49,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
