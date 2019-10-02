@@ -14,8 +14,14 @@ namespace Zork
     }
     class Program
     {
-        private static string[] Rooms = new string[] { "Forest", "West of House", "Behind House", "Clearing", "Canyon View" };
-        private static int playerLocation = 0;
+        private static readonly string[,] Rooms =
+        {
+            {"Rocky Trail", "South of House", "Canyon View"},
+            {"Forest","West of House","Behind House"},
+            {"Dense Woods","North of House","Clearing"}
+        };
+
+        private static (int Row, int Column) Location;
 
         static void Main(string[] args)
         {
@@ -52,7 +58,7 @@ namespace Zork
                         {
                             outputString = "The way is shut";
                         }
-                        Console.WriteLine(Rooms[playerLocation]);
+                        Console.WriteLine(Rooms[Location.Row, Location.Column]);
                         break;
 
                     default:
@@ -65,27 +71,36 @@ namespace Zork
         }
         private static bool Move(Commands commands)
         {
-            int movedir = 0;
+            (int Horizontal, int Vertical) Movement;
+            Movement = (0, 0);
             switch(commands)
             {
                 case Commands.NORTH:
+                    Movement.Horizontal = 0;
+                    Movement.Vertical = -1;
                     break;
 
                 case Commands.SOUTH:
+                    Movement.Horizontal = 0;
+                    Movement.Vertical = 1;
                     break;
 
                 case Commands.EAST:
-                    movedir = 1;
+                   Movement.Horizontal = 1;
+                   Movement.Vertical = 0;
                     break;
 
                 case Commands.WEST:
-                    movedir = -1;
+                    Movement.Horizontal = -1;
+                    Movement.Vertical = 0;
                     break;
             }
 
-            if ((playerLocation + movedir) >= 0 && (playerLocation + movedir) < Rooms.Length)
+            if (((Location.Row + Movement.Vertical) >= 0 && (Location.Row + Movement.Vertical) < Rooms.GetLength(0))
+            && ((Location.Column + Movement.Horizontal) >= 0 && (Location.Column + Movement.Horizontal) < Rooms.GetLength(1)))
             {
-                playerLocation += movedir;
+                Location.Row += Movement.Vertical;
+                Location.Column += Movement.Horizontal;
                 return true;
             }
 
