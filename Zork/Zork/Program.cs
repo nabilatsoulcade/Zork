@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Zork
 {
@@ -14,15 +16,14 @@ namespace Zork
     }
     class Program
     {
-        private static readonly string[,] Rooms =
+        
+        private static string CurrentRoom
         {
-            {"Rocky Trail", "South of House", "Canyon View"},
-            {"Forest","West of House","Behind House"},
-            {"Dense Woods","North of House","Clearing"}
-        };
-
-        private static (int Row, int Column) Location;
-
+            get
+            {
+                return Rooms[Location.Row, Location.Column];
+            }
+        }
         static void Main(string[] args)
         {
             
@@ -71,54 +72,65 @@ namespace Zork
         }
         private static bool Move(Commands commands)
         {
-            (int Horizontal, int Vertical) Movement;
-            Movement = (0, 0);
+            Assert.IsTrue(IsDirection(commands), "Invalid direction.");
+
+            bool isValidMove = true;
             switch(commands)
             {
-                case Commands.NORTH:
-                    Movement.Horizontal = 0;
-                    Movement.Vertical = -1;
+                case Commands.NORTH when Location.Row < Rooms.GetLength(0) - 1:
+                    Location.Row++;
                     break;
 
-                case Commands.SOUTH:
-                    Movement.Horizontal = 0;
-                    Movement.Vertical = 1;
+                case Commands.SOUTH when Location.Row > 0:
+                    Location.Row--;
                     break;
 
-                case Commands.EAST:
-                   Movement.Horizontal = 1;
-                   Movement.Vertical = 0;
+                case Commands.EAST when Location.Column < Rooms.GetLength(1) - 1:
+                    Location.Column++;
                     break;
 
-                case Commands.WEST:
-                    Movement.Horizontal = -1;
-                    Movement.Vertical = 0;
+                case Commands.WEST when Location.Column > 0:
+                    Location.Column--;
+                    break;
+
+                default:
+                    isValidMove = false;
                     break;
             }
 
-            if (((Location.Row + Movement.Vertical) >= 0 && (Location.Row + Movement.Vertical) < Rooms.GetLength(0))
-            && ((Location.Column + Movement.Horizontal) >= 0 && (Location.Column + Movement.Horizontal) < Rooms.GetLength(1)))
-            {
-                Location.Row += Movement.Vertical;
-                Location.Column += Movement.Horizontal;
-                return true;
-            }
-
-            else
-            {
-                return false;
-            }
+            return isValidMove;
         }
-        private static Commands ToCommand(string commandString)
+        private static Commands ToCommand(string commandString) =>
+            Enum.TryParse(commandString, true, out Commands result) ? result : Commands.UNKNOWN;
+
+        private static bool IsDirection(Commands command) => Directions.Contains(command);
+
+        private static readonly string[,] Rooms =
         {
-            //Interpets Input and checks for an associated command
-            if (Enum.TryParse<Commands>(commandString, true, out Commands result))
+            {"Rocky Trail", "South of House", "Canyon View"},
+            {"Forest","West of House","Behind House"},
+            {"Dense Woods","North of House","Clearing"}
+        };
+
+        private static readonly List<Commands> Directions = new List<Commands>
+        {
+            Commands.NORTH,
+            Commands.SOUTH,
+            Commands.EAST,
+            Commands.WEST
+        };
+        
+        private static (int Row, int Column) Location;
+    }
+
+    public static class Assert
+    {
+        [Conditional("DEBUG")]
+        public static void IsTrue(bool expression, string message = null)
+        {
+            if (expression == false)
             {
-                return result;
-            }
-            else
-            {
-                return Commands.UNKNOWN;
+                throw new Exception(message);
             }
         }
     }
