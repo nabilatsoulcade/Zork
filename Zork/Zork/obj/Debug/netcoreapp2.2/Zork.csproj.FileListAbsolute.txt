@@ -19,3 +19,4 @@ D:\In Development\Zork\Zork\Zork\obj\Debug\netcoreapp2.2\Zork.AssemblyInfoInputs
 D:\In Development\Zork\Zork\Zork\obj\Debug\netcoreapp2.2\Zork.AssemblyInfo.cs
 D:\In Development\Zork\Zork\Zork\obj\Debug\netcoreapp2.2\Zork.dll
 D:\In Development\Zork\Zork\Zork\obj\Debug\netcoreapp2.2\Zork.pdb
+D:\In Development\Zork\Zork\Zork\bin\Debug\netcoreapp2.2\Rooms.txt
